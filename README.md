@@ -17,6 +17,8 @@ Aplicație web statică (HTML + JS, fără dependențe) cu întrebări tip gril�
 ```
 .
 ├── src/index.html              # aplicația (întrebările sunt în const Q)
+├── src/og-image.png            # miniatura (1200x630) pentru linkuri partajate
+├── src/favicon.svg|.png|.ico   # iconița din tab
 ├── scripts/check.mjs           # validează întrebările și sintaxa
 ├── scripts/build.mjs           # generează dist/
 ├── .github/workflows/deploy.yml
