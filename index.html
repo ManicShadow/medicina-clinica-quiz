@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ro"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Medicină Clinică – Grilă examen final</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f6f7f9;--card:#fff;--tx:#14213d;--mu:#5b6575;--bd:#d9dee6;--ac:#0b6e6e;--acx:#fff;--ok:#1a7f4b;--okb:#e3f5ea;--no:#b3261e;--nob:#fdeceb}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12161c;--card:#1b222b;--tx:#e8edf3;--mu:#9aa6b5;--bd:#2d3744;--ac:#4fc3c3;--acx:#06201f;--ok:#6fdc9f;--okb:#15301f;--no:#ff8a80;--nob:#3a1b19}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12161c;--card:#1b222b;--tx:#e8edf3;--mu:#9aa6b5;--bd:#2d3744;--ac:#4fc3c3;--acx:#06201f;--ok:#6fdc9f;--okb:#15301f;--no:#ff8a80;--nob:#3a1b19}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:1.5rem;margin:0 0 4px}p.s{color:var(--mu);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px}
+.chip{border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:999px;padding:6px 12px;font-size:.88rem;cursor:pointer}
+.chip.on{background:var(--ac);color:var(--acx);border-color:var(--ac)}
+button.p{background:var(--ac);color:var(--acx);border:0;border-radius:10px;padding:12px 20px;font-size:1rem;font-weight:600;cursor:pointer}
+button.g{background:none;border:1px solid var(--bd);color:var(--tx);border-radius:10px;padding:10px 16px;cursor:pointer;font-size:.95rem}
+.bar{height:6px;background:var(--bd);border-radius:6px;overflow:hidden;margin-bottom:6px}.bar i{display:block;height:100%;background:var(--ac)}
+.meta{display:flex;justify-content:space-between;color:var(--mu);font-size:.85rem;margin-bottom:10px}
+.q{font-size:1.1rem;font-weight:600;margin:0 0 14px}
+.o{display:block;width:100%;text-align:left;background:var(--card);color:var(--tx);border:1.5px solid var(--bd);border-radius:10px;padding:12px 14px;margin-bottom:8px;font-size:1rem;cursor:pointer}
+.o:hover:not(:disabled){border-color:var(--ac)}.o.ok{border-color:var(--ok);background:var(--okb)}.o.no{border-color:var(--no);background:var(--nob)}
+.ex{margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--bg);border-left:4px solid var(--ac)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.big{font-size:2.6rem;font-weight:700;margin:4px 0}
+.rv{border-top:1px solid var(--bd);padding:12px 0}.rv b{color:var(--no)}small{color:var(--mu)}
+select{background:var(--bg);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:8px}
+</style></head><body><main id="app"></main>
+<script>
+// [capitol, întrebare, [variante], index corect, explicație]
+const Q=[
+["Cardiologie","Pacient cu STEMI, la care PCI primară poate fi efectuată în sub 120 de minute. Care este strategia de reperfuzie preferată?",["Tromboliză intravenoasă","Angioplastie coronariană primară (PCI)","Beta-blocant intravenos","Anticoagulare orală și externare"],1,"PCI primară este strategia preferată în STEMI dacă este disponibilă în timp util; tromboliza se folosește când PCI nu poate fi realizată rapid."],
+["Cardiologie","Scorul CHA₂DS₂-VASc se utilizează în fibrilația atrială pentru:",["Evaluarea riscului de sângerare","Evaluarea riscului tromboembolic și indicația de anticoagulare","Alegerea între cardioversie și ablație","Estimarea fracției de ejecție"],1,"CHA₂DS₂-VASc estimează riscul de AVC embolic; riscul hemoragic se evaluează cu HAS-BLED."],
+["Cardiologie","Care dintre următoarele NU reduce mortalitatea în insuficiența cardiacă cu fracție de ejecție redusă?",["IECA / sacubitril-valsartan","Beta-blocant (bisoprolol)","Antagonist de aldosteron","Digoxin"],3,"Digoxinul ameliorează simptomele și reduce spitalizările, dar nu are efect dovedit asupra mortalității. SGLT2i reduc și ei mortalitatea."],
+["Pneumologie","Criteriul spirometric pentru diagnosticul BPOC este:",["VEMS/CVF > 0,7","VEMS/CVF < 0,7 post-bronhodilatator","CVF scăzută cu raport normal","Creștere a VEMS cu >12% după bronhodilatator"],1,"Obstrucția persistentă (VEMS/CVF < 0,7 post-bronhodilatator) definește BPOC; reversibilitatea marcată sugerează astm."],
+["Pneumologie","Cel mai frecvent agent etiologic al pneumoniei comunitare este:",["Staphylococcus aureus","Streptococcus pneumoniae","Klebsiella pneumoniae","Pseudomonas aeruginosa"],1,"Pneumococul rămâne cauza cea mai frecventă de pneumonie comunitară bacteriană."],
+["Pneumologie","Pacient cu pneumotorax sub tensiune (hipotensiune, deviație traheală, torace hipertimpanic). Conduita imediată:",["Radiografie toracică de urgență","Decompresie imediată cu ac / dren pleural","CT toracic","Oxigen și observare"],1,"Pneumotoraxul sub tensiune este diagnostic clinic; se tratează imediat prin decompresie, fără a aștepta imagistica."],
+["Pneumologie","Medicația de salvare (la nevoie) în astmul bronșic este:",["Corticosteroid inhalator","SABA (salbutamol)","Antileucotrienă orală","Teofilină retard"],1,"Beta-2 agonistul cu durată scurtă de acțiune ameliorează rapid bronhospasmul."],
+["Gastroenterologie","Schema clasică de eradicare a H. pylori conține:",["IPP + claritromicină + amoxicilină (sau metronidazol)","IPP + ciprofloxacină","Anti-H2 + vancomicină","Sucralfat + doxiciclină"],0,"Terapia triplă standard: IPP plus două antibiotice, timp de 7–14 zile."],
+["Gastroenterologie","Afectare transmurală, leziuni discontinue („skip lesions”) și granuloame necazeificate sugerează:",["Colită ulcerativă","Boala Crohn","Colită ischemică","Colită pseudomembranoasă"],1,"Boala Crohn poate afecta orice segment al tubului digestiv, transmural, cu leziuni segmentare."],
+["Gastroenterologie","Anticorpii antimitocondriali (AMA) sunt markerul:",["Hepatitei autoimune","Colangitei biliare primitive","Colangitei sclerozante primitive","Bolii celiace"],1,"AMA sunt prezenți la peste 90% dintre pacienții cu colangită biliară primitivă (fostă ciroză biliară primitivă)."],
+["Nefrologie","Cea mai frecventă cauză de boală renală cronică în lume este:",["Glomerulonefrita cronică","Diabetul zaharat","Boala polichistică","Pielonefrita cronică"],1,"Nefropatia diabetică, urmată de cea hipertensivă, domină etiologia BRC."],
+["Nefrologie","Hiperkaliemie severă cu modificări ECG. Primul tratament:",["Insulină + glucoză","Gluconat de calciu intravenos","Hemodializă","Furosemid oral"],1,"Calciul stabilizează membrana miocardică (cardioprotecție). Apoi insulină + glucoză, salbutamol, eliminarea potasiului."],
+["Endocrinologie","Hipertiroidismul autoimun (boala Graves) este mediat de:",["Anticorpi anti-peroxidază","Anticorpi stimulatori ai receptorului TSH","Anticorpi anti-tiroglobulină","Anticorpi anti-receptor ACTH"],1,"În boala Graves, anticorpii stimulează receptorul TSH; clinic: gușă difuză, exoftalmie, mixedem pretibial."],
+["Endocrinologie","Tabloul hiperpigmentare, hipotensiune, hiponatremie, hiperkaliemie și hipoglicemie indică:",["Sindrom Cushing","Boala Addison","Feocromocitom","Hiperaldosteronism primar"],1,"Insuficiența suprarenală primară: deficit de cortizol și aldosteron, cu ACTH crescut (hiperpigmentare)."],
+["Endocrinologie","Cea mai frecventă cauză de hipercalcemie la pacienții din ambulatoriu este:",["Neoplasm cu metastaze osoase","Hiperparatiroidismul primar","Sarcoidoza","Intoxicația cu vitamina D"],1,"Hiperparatiroidismul primar în ambulatoriu; malignitatea predomină la pacienții internați."],
+["Diabet zaharat","Metforminul este contraindicat când:",["HbA1c > 7%","eGFR < 30 ml/min/1,73 m²","Indice de masă corporală > 30","Vârstă > 50 de ani"],1,"Risc de acidoză lactică în insuficiență renală severă; doza se reduce la eGFR 30–45."],
+["Diabet zaharat","Prima măsură terapeutică în cetoacidoza diabetică este:",["Insulină subcutanată","Bicarbonat de sodiu","Fluide intravenoase (ser fiziologic), apoi insulină IV","Antibioticoterapie empirică"],2,"Reechilibrarea volemică precede insulinoterapia IV cu rată fixă; se monitorizează potasiul."],
+["Hematologie","Anemia feriprivă se caracterizează prin:",["MCV crescut, feritină crescută","MCV scăzut, feritină scăzută, TIBC crescut","MCV normal, reticulocite crescute","MCV scăzut, feritină crescută"],1,"Anemie microcitară hipocromă; feritina scăzută este cel mai specific test."],
+["Hematologie","Translocația t(9;22) – cromozomul Philadelphia – se asociază cu:",["Leucemia limfatică cronică","Leucemia mieloidă cronică","Limfomul Burkitt","Policitemia vera"],1,"Gena de fuziune BCR-ABL; tratament cu inhibitori de tirozin-kinază (imatinib)."],
+["Hematologie","Anemia pernicioasă se asociază cu:",["Anticorpi anti-factor intrinsec","Deficit de G6PD","Mutația JAK2","Deficit de piruvat-kinază"],0,"Anticorpii anti-factor intrinsec/celule parietale duc la malabsorbție de B12 și anemie megaloblastică."],
+["Boli infecțioase","Tratamentul empiric al meningitei bacteriene la adultul imunocompetent include:",["Ceftriaxonă (± dexametazonă; ampicilină la > 60 ani)","Amoxicilină orală","Ciprofloxacină","Metronidazol"],0,"Ceftriaxona IV precoce; ampicilina acoperă Listeria la vârstnici și imunodeprimați."],
+["Boli infecțioase","Tratamentul de elecție al malariei severe cu Plasmodium falciparum este:",["Clorochină orală","Artesunat intravenos","Doxiciclină","Primachină"],1,"Artesunatul IV este superior chininei în malaria severă."],
+["Neurologie","Fereastra terapeutică standard pentru tromboliza cu alteplază în AVC ischemic este:",["Până la 4,5 ore de la debut","Până la 24 de ore","Până la 48 de ore","Orice moment, dacă CT este normal"],0,"După excluderea hemoragiei pe CT, tromboliza IV se face în 4,5 ore; trombectomia mecanică are fereastră extinsă în ocluzii de vas mare."],
+["Neurologie","Prima linie în status epilepticus este:",["Fenitoină","Benzodiazepină intravenoasă (lorazepam)","Levetiracetam oral","Propofol"],1,"Lorazepam IV (sau diazepam/midazolam), apoi antiepileptic de linia a doua."],
+["Reumatologie","Anticorpii cei mai specifici pentru lupusul eritematos sistemic sunt:",["Anti-CCP","Anti-dsDNA și anti-Sm","Anti-centromer","ANCA"],1,"ANA sunt sensibili, dar nespecifici; anti-dsDNA și anti-Sm sunt specifici LES."],
+["Reumatologie","Tratamentul acut al unui puseu de gută:",["Alopurinol în doză mare","AINS sau colchicină","Metotrexat","Rasburicază"],1,"Alopurinolul nu se inițiază în puseul acut; se folosesc AINS, colchicină sau corticoizi."],
+["Boli osoase","Diagnosticul de osteoporoză prin DXA se pune la:",["T-score ≤ −1,0","T-score ≤ −2,5","Z-score ≤ −1,0","T-score ≥ +2,5"],1,"Osteopenie: T între −1 și −2,5; osteoporoză: ≤ −2,5."]
+];
+const $=s=>document.querySelector(s),app=$("#app"),CH=[...new Set(Q.map(q=>q[0]))];
+let sel=new Set(CH),n=10,pool=[],i=0,sc=0,log=[],done=false;
+const sh=a=>{a=[...a];for(let k=a.length-1;k>0;k--){const j=Math.random()*(k+1)|0;[a[k],a[j]]=[a[j],a[k]]}return a};
+const best=()=>{try{return localStorage.getItem("mc_best")}catch(e){return null}};
+const save=p=>{try{const b=+best()||0;if(p>b)localStorage.setItem("mc_best",p)}catch(e){}};
+function home(){
+const b=best();
+app.innerHTML=`<h1>Grilă examen final – Medicină Clinică</h1><p class="s">Întrebări tip grilă, cu răspuns și explicație, pe capitolele din Kumar & Clark.${b?` Cel mai bun scor: <b>${b}%</b>`:""}</p>
+<div class="card"><b>Capitole</b><div class="chips">${CH.map(c=>`<button class="chip ${sel.has(c)?"on":""}" data-c="${c}">${c}</button>`).join("")}</div>
+<div class="row"><label>Număr întrebări: <select id="n">${[10,20,999].map(v=>`<option value="${v}" ${v==n?"selected":""}>${v==999?"toate":v}</option>`).join("")}</select></label>
+<button class="p" id="go">Începe</button></div></div>
+<small>Întrebările sunt redactate pe baza capitolelor manualului; verifică întotdeauna în carte.</small>`;
+app.querySelectorAll(".chip").forEach(e=>e.onclick=()=>{const c=e.dataset.c;sel.has(c)?sel.delete(c):sel.add(c);if(!sel.size)sel.add(c);home()});
+$("#n").onchange=e=>n=+e.target.value;
+$("#go").onclick=start}
+function start(){
+pool=sh(Q.filter(q=>sel.has(q[0]))).slice(0,n).map(q=>{const o=q[2].map((t,k)=>[t,k==q[3]]);return{c:q[0],q:q[1],o:sh(o),e:q[4]}});
+i=0;sc=0;log=[];show()}
+function show(){
+const q=pool[i];done=false;
+app.innerHTML=`<div class="meta"><span>${q.c}</span><span>${i+1} / ${pool.length} · scor ${sc}</span></div>
+<div class="bar"><i style="width:${i/pool.length*100}%"></i></div>
+<div class="card"><p class="q">${q.q}</p><div id="os">${q.o.map((o,k)=>`<button class="o" data-k="${k}">${"ABCD"[k]}. ${o[0]}</button>`).join("")}</div><div id="fb"></div></div>`;
+app.querySelectorAll(".o").forEach(b=>b.onclick=()=>pick(+b.dataset.k))}
+function pick(k){
+if(done)return;done=true;const q=pool[i],ok=q.o[k][1];
+if(ok)sc++;log.push({q,k,ok});
+app.querySelectorAll(".o").forEach((b,j)=>{b.disabled=true;if(q.o[j][1])b.classList.add("ok");else if(j==k)b.classList.add("no")});
+$("#fb").innerHTML=`<div class="ex"><b>${ok?"Corect.":"Greșit."}</b> ${q.e}</div><div class="row" style="margin-top:12px"><button class="p" id="nx">${i+1<pool.length?"Următoarea":"Vezi rezultatul"}</button></div>`;
+$("#nx").onclick=()=>{i++;i<pool.length?show():end()}}
+function end(){
+const p=Math.round(sc/pool.length*100);save(p);
+const w=log.filter(l=>!l.ok);
+app.innerHTML=`<div class="card"><small>Rezultat final</small><div class="big">${sc} / ${pool.length} (${p}%)</div><p>${p>=75?"Foarte bine, ești pregătit.":p>=50?"Treci, dar mai repetă capitolele greșite.":"Reia materia și încearcă din nou."}</p>
+<div class="row"><button class="p" id="again">Reia</button><button class="g" id="hm">Meniu</button></div></div>
+${w.length?`<div class="card"><b>De revizuit (${w.length})</b>${w.map(l=>`<div class="rv"><small>${l.q.c}</small><div>${l.q.q}</div><div><b>Ai ales:</b> ${l.q.o[l.k][0]}</div><div style="color:var(--ok)"><b>Corect:</b> ${l.q.o.find(o=>o[1])[0]}</div><small>${l.q.e}</small></div>`).join("")}</div>`:""}`;
+$("#again").onclick=start;$("#hm").onclick=home}
+home();
+</script></body></html>
