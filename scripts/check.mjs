@@ -25,6 +25,10 @@ Q.forEach((q, i) => {
 if (new Set(Q.map(q => q[1])).size !== Q.length) errors.push("Există întrebări duplicate.");
 
 if (errors.length) fail(errors.join("\n"));
+const cnt = {};
+Q.forEach(q => cnt[q[0]] = (cnt[q[0]] || 0) + 1);
+console.log("Întrebări pe capitol (țintă: 50):");
+Object.entries(cnt).sort((a, b) => b[1] - a[1]).forEach(([k, v]) => console.log(`  ${String(v).padStart(3)}  ${k}`));
 console.log(`OK: ${Q.length} întrebări, ${new Set(Q.map(q => q[0])).size} capitole.`);
 
 function fail(msg) { console.error("EROARE:\n" + msg); process.exit(1); }
