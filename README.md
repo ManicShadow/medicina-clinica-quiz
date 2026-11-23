@@ -1,12 +1,12 @@
 # 🩺 Grilă examen final – Medicină Clinică
 
-Aplicație web statică (HTML + JS, fără dependențe) cu întrebări tip grilă în limba română, pe capitolele manualului *Kumar & Clark – Medicină Clinică*, ediția a 10-a. Fiecare întrebare are 4 variante, răspuns corect și explicație.
+Aplicație web statică (HTML + JS, fără dependențe) cu întrebări tip grilă în limba română, pe capitolele manualului *Kumar & Clark – Medicină Clinică*, ediția a 10-a. Fiecare întrebare are 4 variante, răspuns corect și explicație. Baza conține peste 1.150 de întrebări în 23 de capitole (minimum 50 per capitol), redactate pe baza tematicii de rezidențiat.
 
 **Demo:** `https://<utilizator>.github.io/<repo>/`
 
 ## Funcționalități
 
-- Alegere capitole și număr de întrebări (10 / 20 / toate)
+- Alegere capitole (un click alege un singur capitol, următoarele îl adaugă) și număr de întrebări (10 / 20 / 50 / toate)
 - Amestecarea întrebărilor și a variantelor
 - Feedback imediat, cu explicație
 - Scor final, cel mai bun scor (salvat local) și listă de revizuit
